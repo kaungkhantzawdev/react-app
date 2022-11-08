@@ -2,7 +2,12 @@ import BlogItem from "./components/BlogItem";
 import useFetch from "./useFetch";
 
 const Test = () => {
-    const { blogs, loading, clickMe } = useFetch()
+    const { blogs, loading } = useFetch("http://localhost:8000/blogs")
+    const clickMe = (id)=> {
+        fetch("http://localhost:8000/blogs/" + id, {
+            method: "DELETE"
+        })
+    }
     return ( 
         <div className="container mx-auto">
             <div className="relative rounded-xl overflow-auto p-8">

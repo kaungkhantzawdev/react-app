@@ -1,16 +1,11 @@
 import { useState, useEffect } from "react"
-const useFetch = () => {
+const useFetch = (url) => {
     const [blogs, setBlogs] = useState(null)
     const [loading, setLoading] = useState(true)
 
-    const clickMe = (id)=> {
-        const newBlog = blogs.filter( blog => blog.id !== id)
-        return setBlogs(newBlog)
-    }
-
     //useEffect
     useEffect( _=>{
-        fetch("http://localhost:8000/blogs")
+        fetch(url)
             .then( res => res.json())
             .then( data => {
                 setBlogs(data)
@@ -19,7 +14,7 @@ const useFetch = () => {
             .catch(err => console.log(err.message))
     })
 
-    return { blogs, loading, clickMe}
+    return { blogs, loading }
 }
 
 export default useFetch
